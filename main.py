@@ -5,29 +5,20 @@ from tkinter.scrolledtext import ScrolledText
 import string
 
 
-
 root = tk.Tk()
 a = tk.IntVar()
 s = tk.IntVar()
 
-var1 = 636363
-var2 = 909090
-global sfg
-global sbg
-
-sfg = var1
-sbg = var2
 
 winsize=tk.IntVar()
 winsize = "1000x800"
 root.geometry(f"{winsize}")
-root.title("Doom")
+root.title("Doom Text Editor")
 
-global resize
-resize = "False"
-root.resizable(f"{resize}", f"{resize}")
+root.resizable(False, False)
 
 global mainfile
+mainfile=""
 
 fileContents = tk.StringVar()
 
@@ -65,6 +56,7 @@ def SaveAs():
     def on_save():
         UserFileName = filename.get()
         if UserFileName:  # Only proceed if the user entered a filename
+            global mainfile
             mainfile = UserFileName
             SaveToFile1(UserFileName)
             newWindow.destroy()  # Optionally close the "Save As" window after saving
@@ -75,6 +67,8 @@ def SaveAs():
     enterbutton.grid(column=1)
 
 
+
+
 def OpenFile1(filename):
     # The file saving logic will now be inside this function
 
@@ -83,15 +77,13 @@ def OpenFile1(filename):
         editorbox.insert(tk.INSERT,fileContents)
     global mainfile
     mainfile=filename
-    var1 = 000000
-    var2 = 000000
-    global sfg
-    sfg = var1
-    global sbg
-    sbg = var2
 
 
 def savetofile():
+    global mainfile
+    if mainfile=="":
+        SaveAs()
+        return
     conten = editorbox.get("1.0",'end-1c')
     with open(f'{mainfile}', 'w') as usercont:
         usercont.write(conten)
@@ -128,7 +120,12 @@ def save():
     savetofile()
 
 def clear():
+    global mainfile
+    mainfile=""
     editorbox.delete("1.0",'end-1c')
+
+def changesize():
+    root.resizable(True, True)
 
 # MENU
 
@@ -138,11 +135,14 @@ root.config(menu=menu)
 filemenu = tk.Menu(menu)
 menu.add_cascade(label='File', menu=filemenu)
 filemenu.add_command(label='New', command=clear)
-filemenu.add_command(label='Save', command=save, background=f"#{sfg}", foreground=f"#{sbg}")
+filemenu.add_command(label='Save', command=save)
 filemenu.add_command(label='Save As...', command=SaveAs)
 filemenu.add_command(label='Open', command=open_file)
 filemenu.add_separator()
 filemenu.add_command(label='Exit', command=root.quit)
+viewmenu = tk.Menu(menu)
+menu.add_cascade(label='View', menu=viewmenu)
+viewmenu.add_command(label='Resize', command=changesize)
 helpmenu = tk.Menu(menu)
 menu.add_cascade(label='Help', menu=helpmenu)
 helpmenu.add_command(label='Guide')

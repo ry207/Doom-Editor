@@ -1,40 +1,43 @@
-Doom Text Editor
+# Doom Text Editor
 
-Doom Text Editor is an advanced text editor with a dark, "Doom-inspired" aesthetic and command-line prompt for custom commands. This editor is perfect for developers and writers who enjoy a sleek, focused interface with advanced features.
+Doom Text Editor is an advanced text editor with a dark, "Doom-inspired" aesthetic and a built-in command-line prompt for custom commands. This editor is perfect for developers and writers who enjoy a sleek, focused interface with advanced features.
 
-Features
+![Screenshot](path/to/your/screenshot.png)
 
-    Resizable editor with custom themes
-    Command Prompt: Execute commands like save, open <filename>, clear, and exit directly from the command console
-    Basic file operations: New, Save, Save As, Open
-    Shortcut Keys:
-        Ctrl+S: Quick save
-        Ctrl+O: Open file
-        Ctrl+N: New document
+## Features
 
-Guide
+- **Resizable editor with custom themes**
+- **Command Prompt**: Execute commands like `save`, `open <filename>`, `clear`, and `exit` directly from the command console
+- **Basic file operations**: New, Save, Save As, Open
+- **Shortcut Keys**:
+  - **Ctrl+S**: Quick save
+  - **Ctrl+O**: Open file
+  - **Ctrl+N**: New document
 
-For a complete guide on how to use the editor and console commands, go to the Help > Guide section within the editor.
-Command Prompt Features:
+## Guide
 
+For a complete guide on how to use the editor and console commands, go to the **Help** > **Guide** section within the editor.
+
+### Command Prompt Features:
 In the command prompt, you can type the following commands:
+- `clear`: Clears the editor content
+- `save`: Saves the document (if previously saved)
+- `open <filename>`: Opens a specified file
+- `exit`: Closes the editor
+- `open with explorer`: Opens the file explorer to locate and open files
 
-    clear: Clears the editor content
-    save: Saves the document (if previously saved)
-    open <filename>: Opens a specified file
-    exit: Closes the editor
-    open with explorer: Opens the file explorer to locate and open files
+---
 
-Installation and Usage
-1. Prerequisites
+## Installation and Usage
 
-    Python: Version 3.8 or higher. You can download it from python.org.
-    Tkinter: This should come bundled with Python. Install it separately if needed:
-
-    # Debian/Ubuntu
-    sudo apt-get install python3-tk
-    # macOS (usually pre-installed)
-    brew install python-tk
+### 1. Prerequisites
+- **Python**: Version 3.8 or higher. You can download it from [python.org](https://www.python.org/downloads/).
+- **Tkinter**: This should come bundled with Python. Install it separately if needed:
+  ```bash
+  # Debian/Ubuntu
+  sudo apt-get install python3-tk
+  # macOS (usually pre-installed)
+  brew install python-tk
 
 2. Running Locally
 
@@ -93,3 +96,10 @@ Feel free to submit pull requests, suggest new features, or report issues in the
 License
 
 This project is licensed under the MIT License. See LICENSE for more information.
+
+
+In this format:
+- Replace `path/to/your/screenshot.png` with the actual path to a screenshot or image in the repo.
+- Adjust the `/home/yourusername/DoomTextEditor/dist/DoomTextEditor` paths according to the location of the executable and icon in the final setup. 
+
+This `README.md` provides users with an overview, installation steps, and detailed bu

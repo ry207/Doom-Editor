@@ -1,0 +1,26 @@
+REQUIRMENTS:
+    -tkinter
+    -pyinstaller
+
+LINUX DESKTOP APP CREATION
+
+source name_of_venv/bin/activate
+
+pyinstaller --onefile --windowed --name [name_of_app] [your_file].py
+
+[nano/vim/nvim/etc...] ~/path/to/project/folder/[chosen_nameof_desktop_file].desktop
+
+    ENTER THIS IN CHOSEN TEXT EDITOR
+                        
+    [Desktop Entry]
+    Name=Doom Text Editor
+    Comment=Advanced Text Editor with Doom Vibes
+    Exec=/home/ryley/py/projects/px/dist/DoomText
+    Icon=/home/ryley/py/projects/px/favicon.ico
+    Terminal=false
+    Type=Application
+    Categories=Utility;TextEditor;    
+
+chmod +x ~/.local/share/applications/doom_text_editor.desktop
+
+update-desktop-database ~/.local/share/applications/

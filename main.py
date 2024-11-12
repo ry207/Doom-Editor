@@ -5,6 +5,7 @@ from tkinter import filedialog
 import os
 import subprocess
 
+
 # STARTING INFO
 
 root = tk.Tk()
@@ -28,10 +29,10 @@ def setText(word):
 
 # TEXT AREA
 
-editorbox = ScrolledText(root, height=600, width=800, 
+editorbox = ScrolledText(root, height=600, width=800,
                          fg='#C3E88D',               # Soft Mint Green for text
                          insertbackground='#A9A9A9',  # Light Gray cursor color
-                         font=('Courier New', 12)) 
+                         font=('Courier New', 12))
 editorbox.config(borderwidth=3, relief='ridge')  # Adds a 3-pixel border around the text area
 editorbox.pack()
 editorbox['background'] = '#2B3E42'
@@ -41,20 +42,20 @@ def show_command_prompt():
     cmd_window = tk.Toplevel(root)
     cmd_window.title("Doom Command Prompt")
     cmd_window.geometry("600x300")
-    
+
     cmd_window.resizable(False, False)  # Make the command prompt window non-resizable
-    
+
     # Set background color for the command prompt window
     cmd_window.configure(bg='#2B3E42')
 
     # Command prompt label
-    label = tk.Label(cmd_window, text="Enter Command (clear, save, open, exit, explorer, help):", font=("Courier New", 12), fg="#C3E88D", bg="#2B3E42")
+    label = tk.Label(cmd_window, text="Enter Command (clear, save, exit, explorer, help):", font=("Courier New", 12), fg="#C3E88D", bg="#2B3E42")
     label.pack(pady=10)
-    
+
     # Command entry box with a darker background than the main window
     command_entry = tk.Entry(cmd_window, width=50, font=("Courier New", 12), fg="#C3E88D", bg="#1A2428", insertbackground="#A9A9A9", relief="flat")
     command_entry.pack(pady=10)
-    
+
     # Console output (Text widget to display command results) with a matching dark background
     console_output = ScrolledText(cmd_window, width=70, height=10, font=("Courier New", 10), bg="#2B3E42", fg="#C3E88D", insertbackground="#A9A9A9", relief="flat")
     console_output.pack(pady=10)
@@ -79,13 +80,6 @@ def show_command_prompt():
         elif command.lower() == "save as":
             append_to_console("Save as?\n")
             SaveAs()
-        elif command.lower().startswith("open"):
-            filename = command.split(' ')[1] if len(command.split(' ')) > 1 else ''
-            if filename:
-                open_file(filename)
-                append_to_console(f"Opened {filename}\n")
-            else:
-                append_to_console("No filename specified.\n")
         elif command.lower() == "exit":
             append_to_console("K bye\n")
             root.quit()  # Quit the application
@@ -115,34 +109,18 @@ def SaveToFile1(filename):
     return
 
 def SaveAs():
-    newWindow = tk.Toplevel(root)
-    newWindow.title("Save As...")
-    newWindow.geometry("400x200")
-    newWindow.configure(bg='#2B3E42')  # Dark background similar to the guide
+    # Open the file dialog to choose the location and name of the file
+    file_path = filedialog.asksaveasfilename(defaultextension=".txt",
+                                             filetypes=[("Text files", "*.txt"), ("All files", "*.*")],
+                                             title="Save As")
 
-    # Apply the same font and text color as in the guide window
-    filelabel = tk.Label(newWindow, text="Enter file name: ", font=('Courier New', 14), fg="#C3E88D", bg='#2B3E42')
-    filelabel.grid(row=1, column=0, pady=10, padx=10)
-
-    filename = tk.Entry(newWindow, width=20, font=('Courier New', 12), fg="#C3E88D", bg="#1A2428", insertbackground="#A9A9A9", relief="flat")
-    filename.grid(row=2, column=1, pady=10, padx=10)
-
-    def on_save():
-        UserFileName = filename.get()
-        if UserFileName:  # Only proceed if the user entered a filename
-            global mainfile
-            mainfile = UserFileName
-            SaveToFile1(UserFileName)
-            newWindow.destroy()  # Optionally close the "Save As" window after saving
-        else:
-            print("No filename entered.")
-
-    enterbutton = tk.Button(newWindow, text="Save", command=on_save, font=('Courier New', 12), fg="#C3E88D", bg="#1A2428", relief="flat")
-    enterbutton.grid(row=3, column=1, pady=10, padx=10)
-
-    # Adding styling to the close button
-    close_button = tk.Button(newWindow, text="Close", command=newWindow.destroy, font=('Courier New', 12), fg="#C3E88D", bg="#1A2428", relief="flat")
-    close_button.grid(row=4, column=1, pady=10, padx=10)
+    # Check if the user selected a file path (it should not be empty)
+    if file_path:
+        global mainfile
+        mainfile = file_path
+        SaveToFile1(file_path)  # Save the content to the selected file path
+    else:
+        print("Save operation was canceled.")
 
 def savetofile():
     global mainfile
@@ -189,8 +167,8 @@ def open_file_explorer():
 def show_guide():
     guideWindow = tk.Toplevel(root)
     guideWindow.title("Guide")
-    guideWindow.geometry("500x500")
-    guideWindow.resizable(False, False)
+    guideWindow.geometry("1000x600")
+    guideWindow.resizable(True, True)
 
     # Set background color for the guide window
     guideWindow.configure(bg='#2B3E42')
@@ -213,9 +191,9 @@ Keyboard Shortcuts:
 Command Prompt Features:
 - Enter the command "clear" to clear the text editor.
 - Enter the command "save" to save the document.
-- Enter the command "open <filename>" to open a file.
+- Enter the command "explorer " to open the file explorer where you can select a file to edit.
 - Enter "exit" to quit the editor.
-- Enter "open with explorer" to open the file explorer.
+- Enter "help" to open the guide
 
 Enjoy writing with Doom Text Editor!"""
 
@@ -254,3 +232,4 @@ helpmenu.add_command(label='Guide', command=show_guide)
 menu['background'] = '#656565'
 
 root.mainloop()
+

@@ -13,11 +13,8 @@ Doom Text Editor is an advanced text editor with a dark, "Doom-inspired" aesthet
 
 ### Requirements
 - Python 3.x
-- Required Python packages (install via `requirements.txt`):
-  ```bash
-  pip install -r requirements.txt
-
-Usage
+- tkinter
+- pyinstaller(optional)
 
 To start the application:
 
@@ -30,16 +27,21 @@ Linux (e.g., Arch Linux)
 
     Generate the Executable: Use PyInstaller to create an executable:
 
+```
 pyinstaller --onefile --windowed main.py
-
+```
+[nano/vim/nvim/etc...] ~/path/to/project/folder/[chosen_nameof_desktop_file].desktop
+```
 This will generate a standalone executable in the dist folder.
-
+```
 Create a Desktop Entry:
 
     Create a file named DoomTextEditor.desktop in ~/.local/share/applications/.
+```
 
+```
     Add the following content to the file:
-
+```
     [Desktop Entry]
     Name=Doom Text Editor
     Comment=Advanced Text Editor with Doom Vibes
@@ -48,13 +50,13 @@ Create a Desktop Entry:
     Terminal=false
     Type=Application
     Categories=Utility;TextEditor;
-
+```
 Replace /home/username/path/to/DoomTextEditor with the actual path to your executable, and update the Icon path as needed.
 
 Update the Application Database: Run the following command to register the desktop entry:
-
+```
     update-desktop-database ~/.local/share/applications/
-
+```
     You should now be able to find Doom Text Editor in your applications menu.
 
 Windows

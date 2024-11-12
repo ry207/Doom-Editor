@@ -2,6 +2,8 @@
 
 Doom Text Editor is an advanced text editor with a dark, "Doom-inspired" aesthetic and enhanced functionalities, including a command console for quick command execution.
 
+![Screenshot of Doom Text Editor](images/doomtext.png)
+
 ## Features
 - **Advanced Text Editing**: Supports saving, opening, and editing files.
 - **Command Console**: Execute commands directly within the editor, like saving, opening files, and clearing text.

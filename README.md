@@ -25,22 +25,20 @@ Building as an Executable
 Follow the steps below to convert the Doom Text Editor into an executable on Linux, Windows, and macOS.
 Linux (e.g., Arch Linux)
 
-    Generate the Executable: Use PyInstaller to create an executable:
 
 ```
 pyinstaller --onefile --windowed main.py
 ```
+This will generate a standalone executable in the dist folder.
+
+
+    Create a file named DoomTextEditor.desktop in ~/.local/share/applications/.
+
 ```
 [nano/vim/nvim/etc...] ~/path/to/project/folder/[chosen_nameof_desktop_file].desktop
 ```
-This will generate a standalone executable in the dist folder.
-```
-Create a Desktop Entry:
 
-    Create a file named DoomTextEditor.desktop in ~/.local/share/applications/.
-```
 
-```
     Add the following content to the file:
 ```
     [Desktop Entry]
@@ -63,8 +61,9 @@ Update the Application Database: Run the following command to register the deskt
 Windows
 
     Generate the Executable: Use PyInstaller to create an .exe:
-
+```
     pyinstaller --onefile --windowed main.py
+```
 
     This will place an executable in the dist folder.
 
@@ -84,7 +83,9 @@ macOS
     Generate the Executable:
         Run PyInstaller to create a macOS app bundle:
 
+```
         pyinstaller --onefile --windowed main.py
+```
 
     Add Application Metadata:
         In the dist folder, rename the output to DoomTextEditor.app.
@@ -102,7 +103,7 @@ The Doom Text Editor includes helpful features, such as a guide and built-in com
     Command Console: Press "Show Command Prompt" in the View menu to open the console, where you can execute commands:
         clear - Clears the editor.
         save - Saves the current document.
-        open <filename> - Opens a specified file.
+        explorer - Openes file explorer
         exit - Closes the text editor.
 
 ![Screenshot of Doom Text Editor](images/examp1.png)

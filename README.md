@@ -102,4 +102,6 @@ The Doom Text Editor includes helpful features, such as a guide and built-in com
         open <filename> - Opens a specified file.
         exit - Closes the text editor.
 
+![Screenshot of Doom Text Editor](images/doomtextexamp.png)
+
 Enjoy using Doom Text Editor!

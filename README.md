@@ -1,105 +1,103 @@
-# Doom Text Editor
+Doom Text Editor
 
-Doom Text Editor is an advanced text editor with a dark, "Doom-inspired" aesthetic and a built-in command-line prompt for custom commands. This editor is perfect for developers and writers who enjoy a sleek, focused interface with advanced features.
+Doom Text Editor is an advanced text editor with a dark, "Doom-inspired" aesthetic and enhanced functionalities, including a command console for quick command execution.
+Features
 
-![Screenshot](path/to/your/screenshot.png)
+    Advanced Text Editing: Supports saving, opening, and editing files.
+    Command Console: Execute commands directly within the editor, like saving, opening files, and clearing text.
+    Stylized User Interface: Customizable dark theme with additional menus and command shortcuts.
 
-## Features
+Installation and Setup
+Requirements
 
-- **Resizable editor with custom themes**
-- **Command Prompt**: Execute commands like `save`, `open <filename>`, `clear`, and `exit` directly from the command console
-- **Basic file operations**: New, Save, Save As, Open
-- **Shortcut Keys**:
-  - **Ctrl+S**: Quick save
-  - **Ctrl+O**: Open file
-  - **Ctrl+N**: New document
+    Python 3.x
+    Required Python packages (install via requirements.txt):
 
-## Guide
+    pip install -r requirements.txt
 
-For a complete guide on how to use the editor and console commands, go to the **Help** > **Guide** section within the editor.
+Usage
 
-### Command Prompt Features:
-In the command prompt, you can type the following commands:
-- `clear`: Clears the editor content
-- `save`: Saves the document (if previously saved)
-- `open <filename>`: Opens a specified file
-- `exit`: Closes the editor
-- `open with explorer`: Opens the file explorer to locate and open files
+To start the application:
 
----
+python main.py
 
-## Installation and Usage
+Building as an Executable
 
-### 1. Prerequisites
-- **Python**: Version 3.8 or higher. You can download it from [python.org](https://www.python.org/downloads/).
-- **Tkinter**: This should come bundled with Python. Install it separately if needed:
-  ```bash
-  # Debian/Ubuntu
-  sudo apt-get install python3-tk
-  # macOS (usually pre-installed)
-  brew install python-tk
+Follow the steps below to convert the Doom Text Editor into an executable on Linux, Windows, and macOS.
+Linux (e.g., Arch Linux)
 
-2. Running Locally
-
-Clone the repository and navigate to the project directory:
-
-git clone https://github.com/yourusername/DoomTextEditor.git
-cd DoomTextEditor
-python3 main.py
-
-3. Building an Executable
-
-To create standalone executables on Windows, macOS, and Linux, follow these steps.
-Install PyInstaller
-
-PyInstaller is used to bundle the application:
-
-pip install pyinstaller
-
-Build Instructions
-
-    Windows:
+    Generate the Executable: Use PyInstaller to create an executable:
 
 pyinstaller --onefile --windowed main.py
 
-This creates an executable in the dist folder. The --windowed option hides the console window.
+This will generate a standalone executable in the dist folder.
 
-macOS:
+Create a Desktop Entry:
 
-pyinstaller --onefile --windowed main.py
+    Create a file named DoomTextEditor.desktop in ~/.local/share/applications/.
 
-PyInstaller will create a dist folder with a standalone .app file. You may need to adjust the security settings on macOS to open the app.
+    Add the following content to the file:
 
-Linux:
+    [Desktop Entry]
+    Name=Doom Text Editor
+    Comment=Advanced Text Editor with Doom Vibes
+    Exec=/home/username/path/to/DoomTextEditor
+    Icon=/home/username/path/to/icon.png
+    Terminal=false
+    Type=Application
+    Categories=Utility;TextEditor;
 
-    pyinstaller --onefile main.py
+Replace /home/username/path/to/DoomTextEditor with the actual path to your executable, and update the Icon path as needed.
 
-    This will create an executable in the dist folder, which you can run by typing ./DoomTextEditor.
+Update the Application Database: Run the following command to register the desktop entry:
 
-4. Creating a Desktop Shortcut (Linux)
+    update-desktop-database ~/.local/share/applications/
 
-To create a desktop shortcut, create a .desktop file in ~/.local/share/applications/:
+    You should now be able to find Doom Text Editor in your applications menu.
 
-[Desktop Entry]
-Name=Doom Text Editor
-Comment=Advanced Text Editor with Doom Vibes
-Exec=/home/yourusername/DoomTextEditor/dist/DoomTextEditor
-Icon=/home/yourusername/DoomTextEditor/icon.png
-Terminal=false
-Type=Application
-Categories=Utility;TextEditor;
+Windows
 
-Replace /home/yourusername/DoomTextEditor/dist/DoomTextEditor with the path to your executable and /home/yourusername/DoomTextEditor/icon.png with the path to an icon file.
-Contributing
+    Generate the Executable: Use PyInstaller to create an .exe:
 
-Feel free to submit pull requests, suggest new features, or report issues in the Issues section.
-License
+    pyinstaller --onefile --windowed main.py
 
-This project is licensed under the MIT License. See LICENSE for more information.
+    This will place an executable in the dist folder.
 
+    Create a Shortcut:
+        Right-click the DoomTextEditor.exe file and select Create shortcut.
+        Move the shortcut to your Start menu or desktop.
 
-In this format:
-- Replace `path/to/your/screenshot.png` with the actual path to a screenshot or image in the repo.
-- Adjust the `/home/yourusername/DoomTextEditor/dist/DoomTextEditor` paths according to the location of the executable and icon in the final setup. 
+    Add an Icon (Optional):
+        Right-click the shortcut and select Properties.
+        Under the Shortcut tab, click Change Icon and select your custom icon file.
 
-This `README.md` provides users with an overview, installation steps, and detailed bu
+    Launch Doom Text Editor:
+        Now, you can launch Doom Text Editor directly from the shortcut on your desktop or Start menu.
+
+macOS
+
+    Generate the Executable:
+        Run PyInstaller to create a macOS app bundle:
+
+        pyinstaller --onefile --windowed main.py
+
+    Add Application Metadata:
+        In the dist folder, rename the output to DoomTextEditor.app.
+        Place the app in your /Applications directory for easy access.
+
+    Add Icon (Optional):
+        Use macOS tools like Icon Composer or Image2Icon to convert an image to .icns format.
+        Add the .icns file to your app’s Resources directory, then update the .plist to reflect the icon change.
+
+Guide for Using Doom Text Editor
+
+The Doom Text Editor includes helpful features, such as a guide and built-in commands.
+
+    Guide: Access the guide from the "Help" menu to see all shortcuts and features.
+    Command Console: Press "Show Command Prompt" in the View menu to open the console, where you can execute commands:
+        clear - Clears the editor.
+        save - Saves the current document.
+        open <filename> - Opens a specified file.
+        exit - Closes the text editor.
+
+Enjoy using Doom Text Editor!

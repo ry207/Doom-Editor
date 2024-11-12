@@ -1,9 +1,10 @@
 import tkinter as tk
 from tkinter.ttk import *
-from tkinter import messagebox
 from tkinter.scrolledtext import ScrolledText
-import string
+from tkinter import filedialog
 
+
+#STARTING INFO
 
 root = tk.Tk()
 a = tk.IntVar()
@@ -29,9 +30,12 @@ def setText(word):
 # TEXT AREA
 
 # input entry
-editorbox = ScrolledText(root, height=600, width=800, fg='#ffffff', insertbackground='white', font=('Terminal', 14))
+editorbox = ScrolledText(root, height=600, width=800, fg='#ffffff', insertbackground='white', font=('Terminal', 12))
 editorbox.pack()
 editorbox['background'] = '#444444'
+
+
+# SAVE
 
 def SaveToFile1(filename):
     conten = editorbox.get("1.0",'end-1c')
@@ -67,18 +71,6 @@ def SaveAs():
     enterbutton.grid(column=1)
 
 
-
-
-def OpenFile1(filename):
-    # The file saving logic will now be inside this function
-
-    with open(f'{filename}', 'r') as filecont:
-        fileContents = filecont.read()
-        editorbox.insert(tk.INSERT,fileContents)
-    global mainfile
-    mainfile=filename
-
-
 def savetofile():
     global mainfile
     if mainfile=="":
@@ -89,53 +81,57 @@ def savetofile():
         usercont.write(conten)
 
 
+# OPEN FILE
+
+def OpenFile1(filename):
+    # The file saving logic will now be inside this function
+
+    with open(f'{filename}', 'r') as filecont:
+        fileContents = filecont.read()
+        editorbox.insert(tk.INSERT,fileContents)
+    global mainfile
+    mainfile=filename
+    print(mainfile)
+
+
+
+
 def open_file():
+    filename = filedialog.askopenfilename()
     editorbox.delete("1.0",'end-1c')
-    newWindow = tk.Toplevel(root)
-    newWindow.title("Open")
-    newWindow.geometry("400x200")
+    OpenFile1(filename)
+    #newWindow = tk.Toplevel(root)
+    #newWindow.title("Open")
+    #newWindow.geometry("400x200")
 
-    filelabel = tk.Label(newWindow, text="Enter file name: ", font=('Arial', 14))
-    filelabel.grid(row=1, column=0)
+    #filelabel = tk.Label(newWindow, text="Enter file name: ", font=('Arial', 14))
+    #filelabel.grid(row=1, column=0)
 
-    filename = tk.Entry(newWindow, width=20, font=('Arial', 12))
-    filename.grid(row=2, column=1, pady=2)
-
-    # Define the button to trigger the save operation
-    def on_save():
-        UserFileName = filename.get()
-        if UserFileName:  # Only proceed if the user entered a filename
-            OpenFile1(UserFileName)
-            newWindow.destroy()  # Optionally close the "Save As" window after saving
-        else:
-            print("No filename entered.")
-
-
-    enterbutton = tk.Button(newWindow, text="Open", command=on_save)
-    enterbutton.grid(column=1)
+    #filename = tk.Entry(newWindow, width=20, font=('Arial', 12))
+    #filename.grid(row=2, column=1, pady=2)
 
 
 
-def save():
-    savetofile()
+# RANDOM
 
 def clear():
     global mainfile
     mainfile=""
     editorbox.delete("1.0",'end-1c')
+    print(mainfile)
 
 def changesize():
     root.resizable(True, True)
 
-# MENU
 
+# MENU
 
 menu = tk.Menu(root, fg='#ffedff')
 root.config(menu=menu)
 filemenu = tk.Menu(menu)
 menu.add_cascade(label='File', menu=filemenu)
 filemenu.add_command(label='New', command=clear)
-filemenu.add_command(label='Save', command=save)
+filemenu.add_command(label='Save', command=savetofile)
 filemenu.add_command(label='Save As...', command=SaveAs)
 filemenu.add_command(label='Open', command=open_file)
 filemenu.add_separator()

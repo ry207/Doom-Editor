@@ -1,19 +1,19 @@
-Doom Text Editor
+# Doom Text Editor
 
 Doom Text Editor is an advanced text editor with a dark, "Doom-inspired" aesthetic and enhanced functionalities, including a command console for quick command execution.
-Features
 
-    Advanced Text Editing: Supports saving, opening, and editing files.
-    Command Console: Execute commands directly within the editor, like saving, opening files, and clearing text.
-    Stylized User Interface: Customizable dark theme with additional menus and command shortcuts.
+## Features
+- **Advanced Text Editing**: Supports saving, opening, and editing files.
+- **Command Console**: Execute commands directly within the editor, like saving, opening files, and clearing text.
+- **Stylized User Interface**: Customizable dark theme with additional menus and command shortcuts.
 
-Installation and Setup
-Requirements
+## Installation and Setup
 
-    Python 3.x
-    Required Python packages (install via requirements.txt):
-
-    pip install -r requirements.txt
+### Requirements
+- Python 3.x
+- Required Python packages (install via `requirements.txt`):
+  ```bash
+  pip install -r requirements.txt
 
 Usage
 

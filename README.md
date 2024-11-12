@@ -30,6 +30,7 @@ Linux (e.g., Arch Linux)
 ```
 pyinstaller --onefile --windowed main.py
 ```
+```
 [nano/vim/nvim/etc...] ~/path/to/project/folder/[chosen_nameof_desktop_file].desktop
 ```
 This will generate a standalone executable in the dist folder.

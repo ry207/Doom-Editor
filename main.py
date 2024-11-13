@@ -11,6 +11,8 @@ import subprocess
 root = tk.Tk()
 a = tk.IntVar()
 s = tk.IntVar()
+global font
+font = 12
 
 winsize = tk.IntVar()
 winsize = "900x600"
@@ -20,9 +22,9 @@ root.title("Doom Text Editor")
 global fgc
 global bgc
 global ibc
-fgc = "#C3E88D"
-bgc = "#2B3E42"
-ibc = "#A9A9A9"
+fgc = "#ffb7c5"
+bgc = "#252525"
+ibc = "#ffffff"
 
 root.resizable(True, True)
 
@@ -39,7 +41,7 @@ def setText(word):
 editorbox = ScrolledText(root, height=600, width=800,
                          fg=f'{fgc}',               # Soft Mint Green for text
                          insertbackground=f'{ibc}',  # Light Gray cursor color
-                         font=("Courier New", 12, "bold"),
+                         font=("Courier New", f"{font}", "bold"),
                          undo=True)
 editorbox.config(borderwidth=3, relief='ridge')  # Adds a 3-pixel border around the text area
 editorbox.pack()
@@ -55,10 +57,10 @@ def show_command_prompt():
     cmd_window.resizable(False, False)  # Make the command prompt window non-resizable
 
     # Set background color for the command prompt window
-    cmd_window.configure(bg='#2B3E42')
+    cmd_window.configure(bg=f'{bgc}')
 
     # Command prompt label
-    label = tk.Label(cmd_window, text="Enter Command (clear, save, exit, explorer, help, color):", font=("Courier New", 12), fg="#C3E88D", bg="#2B3E42")
+    label = tk.Label(cmd_window, text="Enter Command (clear, save, exit, explorer, help, color):", font=("Courier New", 12), fg=f"{fgc}", bg=f"{bgc}")
     label.pack(pady=10)
 
     # Command entry box with a darker background than the main window
@@ -66,7 +68,7 @@ def show_command_prompt():
     command_entry.pack(pady=10)
 
     # Console output (Text widget to display command results) with a matching dark background
-    console_output = ScrolledText(cmd_window, width=70, height=10, font=("Courier New", 10), bg="#2B3E42", fg="#C3E88D", insertbackground="#A9A9A9", relief="flat")
+    console_output = ScrolledText(cmd_window, width=70, height=10, font=("Courier New", 10), fg=f"{fgc}", bg=f"{bgc}", insertbackground=f"{ibc}", relief="flat")
     console_output.pack(pady=10)
 
     # Function to process command when Enter key is pressed
@@ -213,6 +215,19 @@ def colorprop():
     coloribc = tk.Entry(colorwindow, width=50, font=("Courier New", 12), fg=f"{fgc}", bg=f"{bgc}", insertbackground=f"{ibc}", relief="flat")
     coloribc.pack()
 
+    def change_font():
+        value = spinbox.get()
+        global font
+        font = value
+        editorbox.config(font=("Courier New", f"{font}", "bold"))
+
+        spinbox.bind("<Return>", lambda event: change_font())
+
+    spinbox = tk.Spinbox(colorwindow, from_=9, to=42, width=10, relief="sunken", repeatdelay=500, repeatinterval=100,
+                     font=("Arial", 12), bg=f"{bgc}", fg=f"{fgc}", command=change_font, highlightbackground = "black", highlightcolor= "black")
+    spinbox.config(state="normal", cursor="hand2", bd=3, justify="center", wrap=True)
+    spinbox.pack(padx=20, pady=20)
+
     def update():
         global bgc
         global fgc
@@ -237,9 +252,9 @@ def colorprop():
             ibc = coloribc.get()
         editorbox.config(borderwidth=3, relief='ridge', fg=f"{fgc}", bg=f"{bgc}", insertbackground=f"{ibc}") 
 
-
-    enter_button = tk.Button(colorwindow, text="Enter", command=update)
+    enter_button = tk.Button(colorwindow, text="Enter", command=update, bg=f"{bgc}", fg=f"{fgc}")
     enter_button.pack()
+
 
 
 # Guide
@@ -250,7 +265,7 @@ def show_guide():
     guideWindow.resizable(True, True)
 
     # Set background color for the guide window
-    guideWindow.configure(bg='#2B3E42')
+    guideWindow.configure(bg=f'{bgc}')
 
     guide_text = """Welcome to Doom Text Editor!
 
@@ -258,34 +273,38 @@ Here's a quick guide on how to use the main features:
 
 - New: Clears the current text and starts a new document.
 - Save: Saves the current document to the last saved location.
-- Save As: Allows you to save the document under a new filename.
+ - Save As: Allows you to save the document under a new filename.
 - Open: Opens a file, replacing any existing text in the editor.
 - Resize: Enables the window to be resizable.
-- Color Properties: Change the background, text and cursor color
+- Properties: Change the properties of the editor including; background color, text color, text size and cursor color
 
 Keyboard Shortcuts:
 - Ctrl+S: Quick save.
 - Ctrl+O: Open file.
 - Ctrl+N: Start new document.
 - Ctrl+Z: Undo
-- Alt+C: Color Properties
+- Ctrl+G: Guide
+- Alt+P: Properties
 - Alt+E: Exit
 
-Color Properties:
+Properties:
 - Enter hex codes for any of the listed elements then press enter, type "reset" in the wanted field to reset the element to default.
+- Change the font size with the spin box.
+    -Either type and press return or use the arrows.
 
 Command Prompt Features:
 - Enter the command "clear" to clear the text editor.
 - Enter the command "save" to save the document.
 - Enter the command "explorer " to open the file explorer where you can select a file to edit.
 - Enter "exit" to quit the editor.
-- Enter "help" to open the guide
+- Enter "help" to open the guide.
+- Enter "properties" to open the properties.
 
 Enjoy writing with Doom Text Editor!"""
 
     # Apply the same styling to the guide label as the rest of the app
-    guide_label = tk.Label(guideWindow, text=guide_text, font=('Courier New', 12), fg="#C3E88D", bg="#2B3E42", justify="left", wraplength=450)
-    guide_label.pack(pady=20, padx=20)
+    guide_label = tk.Label(guideWindow, text=guide_text, font=('Courier New', 12), fg=f'{fgc}', bg=f'{bgc}', justify="left", wraplength=450)
+    guide_label.pack(pady=10, padx=10)
 
 # MENU
 
@@ -293,9 +312,10 @@ root.bind('<Control-s>', lambda event: savetofile())  # Ctrl+S to save
 root.bind('<Control-n>', lambda event: clear())       # Ctrl+N for new document
 root.bind('<Control-o>', lambda event: open_file_explorer())  # Ctrl+O to open file
 root.bind('<Control-z>', undo_action)
+root.bind('<Control-g>', lambda event: show_guide())
 root.bind('<Control-Key-a>', select_all)
 root.bind('<Alt-e>', lambda event: root.quit())
-root.bind('<Alt-c>', lambda event: colorprop())
+root.bind('<Alt-p>', lambda event: colorprop())
 editorbox.bind("<Tab>", insert_tab)                   # Tab prints 4 spaces instead of 8
 
 menu = tk.Menu(root, fg='#ffedff')
@@ -311,8 +331,8 @@ filemenu.add_separator()
 filemenu.add_command(label='Exit', command=root.quit)
 viewmenu = tk.Menu(menu)
 menu.add_cascade(label='View', menu=viewmenu)
-viewmenu.add_command(label='Show Command Prompt', command=show_command_prompt)
-viewmenu.add_command(label='Show Color Properties', command=colorprop)
+viewmenu.add_command(label='Command Prompt', command=show_command_prompt)
+viewmenu.add_command(label='Properties', command=colorprop)
 
 helpmenu = tk.Menu(menu)
 menu.add_cascade(label='Help', menu=helpmenu)
@@ -323,4 +343,4 @@ menu['background'] = '#656565'
 
 root.mainloop()
 
-
+    

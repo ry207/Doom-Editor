@@ -46,7 +46,6 @@ editorbox.pack()
 editorbox['background'] = f'{bgc}'
 
 
-
 # Doom Command Console Window
 def show_command_prompt():
     cmd_window = tk.Toplevel(root)
@@ -59,7 +58,7 @@ def show_command_prompt():
     cmd_window.configure(bg='#2B3E42')
 
     # Command prompt label
-    label = tk.Label(cmd_window, text="Enter Command (clear, save, exit, explorer, help):", font=("Courier New", 12), fg="#C3E88D", bg="#2B3E42")
+    label = tk.Label(cmd_window, text="Enter Command (clear, save, exit, explorer, help, color):", font=("Courier New", 12), fg="#C3E88D", bg="#2B3E42")
     label.pack(pady=10)
 
     # Command entry box with a darker background than the main window
@@ -93,6 +92,9 @@ def show_command_prompt():
         elif command.lower() == "exit":
             append_to_console("K bye\n")
             root.quit()  # Quit the application
+        elif command.lower() == "color":
+            append_to_console("Color Properties...\n")
+            colorprop()  # 
         elif command.lower() == "explorer":
             append_to_console("Opening file explorer\n")
             open_file_explorer()
@@ -179,6 +181,10 @@ def undo_action(event=None):
     except tk.TclError:
         pass  # If there's nothing to undo, do nothing
 
+def select_all(event=None):
+    editorbox.tag_add('sel', '1.0', 'end')
+    return "break"
+
 
 # Change color window
 def colorprop():
@@ -263,6 +269,7 @@ Keyboard Shortcuts:
 - Ctrl+N: Start new document.
 - Ctrl+Z: Undo
 - Alt+C: Color Properties
+- Alt+E: Exit
 
 Color Properties:
 - Enter hex codes for any of the listed elements then press enter, type "reset" in the wanted field to reset the element to default.
@@ -286,6 +293,8 @@ root.bind('<Control-s>', lambda event: savetofile())  # Ctrl+S to save
 root.bind('<Control-n>', lambda event: clear())       # Ctrl+N for new document
 root.bind('<Control-o>', lambda event: open_file_explorer())  # Ctrl+O to open file
 root.bind('<Control-z>', undo_action)
+root.bind('<Control-Key-a>', select_all)
+root.bind('<Alt-e>', lambda event: root.quit())
 root.bind('<Alt-c>', lambda event: colorprop())
 editorbox.bind("<Tab>", insert_tab)                   # Tab prints 4 spaces instead of 8
 
@@ -313,3 +322,5 @@ menu['background'] = '#656565'
 
 
 root.mainloop()
+
+

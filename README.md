@@ -32,7 +32,7 @@ pyinstaller --onefile --windowed main.py
 This will generate a standalone executable in the dist folder.
 
 
-    Create a file named DoomTextEditor.desktop in ~/.local/share/applications/.
+    Create a .desktop file in ~/.local/share/applications/.
 
 ```
 [nano/vim/nvim/etc...] ~/path/to/project/folder/[chosen_nameof_desktop_file].desktop

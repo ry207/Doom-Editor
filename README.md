@@ -108,4 +108,6 @@ The Doom Text Editor includes helpful features, such as a guide and built-in com
 
 ![Screenshot of Doom Text Editor](images/examp1.png)
 
+![Screenshot of Doom Text Editor](images/color_properties_demo.png)
+
 Enjoy using Doom Text Editor!
